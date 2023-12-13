@@ -1,0 +1,185 @@
+﻿@using GProject.Models;
+@model List<Product>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .search-box {
+            display: flex;
+            margin-right: auto;
+            width: 50%;
+            justify-content: center;
+        }
+
+        .search-input {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+        .search-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right button {
+            margin-left: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .main-content {
+            margin: 1em 10em;
+        }
+
+        .action {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .result table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .result th,
+        .result td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: auto;
+        }
+
+        .button-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .button-container a {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px;
+            text-decoration: none;
+        }
+        .pagination{
+            text-align: center;
+        }
+
+        h2 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    p {
+        color: #666;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <a href="../Home/getAllProducts" style="color: white; text-decoration:none">
+            <h2  style="color: white;">Khangnek</h2>
+            </a>
+        </div>
+        <div class="search-box">
+            <form id="searchForm" action="/Home/Search" method="get" style="display: flex; width: 80%">
+    <input type="text" class="search-input" name="path" placeholder="Search...">
+    <button type="submit" class="search-button" onclick="submitForm()">Search</button>
+</form>
+        </div>
+        <div class="header-right">
+            <a href="../Cart/ViewCart">
+            <button>Cart</button>
+            </a>
+            <a href="../Trending/TrendingProduct">
+            <button>Trending</button>
+            </a>
+            <button>Order tracking</button>
+        </div>
+    </header>
+    <div class="main-content">
+
+<h2>Top 10 Products by UnitsOnOrder</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Units On Order</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.UnitsOnOrder</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    </div>
+    </body>
+    </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .search-box {
+            display: flex;
+            margin-right: auto;
+            width: 50%; 
+            justify-content: center; 
+        }
+
+        .search-input {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+        .search-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right button {
+            margin-left: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h2>Khangnek</h2>
+        </div>
+        <div class="search-box">
+            <form action="@Url.Action("Search", "Home")" method="get" style="display: flex; width: 80%">
+                <input type="text" class="search-input" name="path" placeholder="Search...">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+        <div class="header-right">
+            <button>Cart</button>
+            <button>Statistic</button>
+            <button>Order tracking</button>
+        </div>
+    </header>
+</body>
+</html>

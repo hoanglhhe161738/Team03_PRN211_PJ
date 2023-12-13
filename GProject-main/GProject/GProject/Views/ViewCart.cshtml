@@ -1,0 +1,253 @@
+﻿@using GProject.Models;
+@model List<CartItem>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #333;
+                color: white;
+                padding: 10px;
+            }
+
+            header h2 {
+                margin: 0;
+            }
+
+            .search-box {
+                display: flex;
+                margin-right: auto;
+                width: 50%;
+                justify-content: center;
+            }
+
+            .search-input {
+                padding: 5px;
+                border: none;
+                border-radius: 3px;
+                width: 100%;
+            }
+
+            .search-button {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                margin-left: 5px;
+                cursor: pointer;
+            }
+
+            .header-right {
+                display: flex;
+                align-items: center;
+            }
+
+            .header-right button {
+                margin-left: 10px;
+                padding: 5px;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .main-content {
+                margin: 1em 10em;
+            }
+
+            .action {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+            .result table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 10px;
+            }
+
+            .result th,
+            .result td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+                width: auto;
+            }
+
+            .button-container {
+                position: relative;
+                text-align: center;
+            }
+
+            .button-container a {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                border: none;
+                border-radius: 3px;
+                padding: 5px;
+                text-decoration: none;
+            }
+
+            .pagination {
+                text-align: center;
+            }
+
+            h2 {
+                color: #333;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            tbody tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            p {
+                color: #666;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <div class="header-left">
+                <a href="../Home/getAllProducts" style="color: white; text-decoration:none">
+                    <h2 style="color: white;">Khangnek</h2>
+                </a>
+            </div>
+            <div class="search-box">
+                <form id="searchForm" action="/Home/Search" method="get" style="display: flex; width: 80%">
+                    <input type="text" class="search-input" name="path" placeholder="Search...">
+                    <button type="submit" class="search-button" onclick="submitForm()">Search</button>
+                </form>
+            </div>
+            <div class="header-right">
+            <a href="../Cart/ViewCart">
+            <button>Cart</button>
+            </a>
+            <a href="../Trending/TrendingProduct">
+            <button>Trending</button>
+            </a>
+            <button>Order tracking</button>
+        </div>
+        </header>
+        <div class="main-content">
+            <h2>Your Shopping Cart</h2>
+
+        @if (Model.Count > 0)
+        {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th class="button-container">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.UnitPrice</td>
+                                <td>
+                                @item.Quantity
+                                </td>
+                                <td class="total-price">@(item.UnitPrice * item.Quantity)</td>
+                                <td class="button-container">
+                                            <form method="post" name="Buynow+@item.ProductId" action="@Url.Action("CreatePaymentUrl", "Vnpay")">
+@*                                     @{
+                                        PaymentInformationModel pfm = new PaymentInformationModel();
+                                        pfm.OrderType = "BUY";
+                                        pfm.Amount = (double) (item.UnitPrice * item.Quantity);
+                                        pfm.OrderDescription = "";
+                                        pfm.Name = "Payment for " + item.Quantity + "product(s) with name: " + item.ProductName;
+                                    } *@
+                                            <input type="hidden" name="OrderType" value="BUY"/>
+                                                            <input type="hidden" name="Amount" value="@(item.UnitPrice * item.Quantity)"/>
+                                                            <input type="hidden" name="OrderDescription" value=""/>
+                                                                            <input type="hidden" name="Name" value=""Payment for " + @item.Quantity + "product(s) with name: " + @item.ProductName"/>
+                                                    <button type="submit" style="background-color: #4CAF50;" class="search-button" onclick="(Buynow+@item.ProductId).submit()">Buy Now</button>
+                                    </form>
+                                </td>
+                            </tr>
+                    }
+                    </tbody>
+@*                     <tfoot>
+                        <tr>
+                            <td colspan="3"><strong>Total:</strong></td>
+                            <td id="cart-total" class="total-price">0.00</td>
+                            <td></td>
+                        </tr>
+                    </tfoot> *@
+                </table>
+
+                <div class="button-container" style="margin: 1em 0; float: right">
+                    <a style="background-color: #e41d1d;" href="../Cart/AddToCart?productId=">Pay for the entire cart</a>
+                </div>
+        }
+        else
+        {
+                <p>Your cart is empty.</p>
+        }
+        </div>
+    </body>
+    <script>
+        function updateTotal(input, unitPrice) {
+            var quantity = input.value;
+            var totalPriceCell = input.parentElement.nextElementSibling; // Ô Total Price tương ứng
+            var totalPrice = unitPrice * quantity;
+            totalPriceCell.innerHTML = totalPrice.toFixed(2);
+
+            // Cập nhật tổng giá trị toàn bộ giỏ hàng (nếu cần)
+            updateCartTotal();
+        }
+
+        function updateCartTotal() {
+            var total = 0;
+            var totalCells = document.querySelectorAll('.total-price');
+            totalCells.forEach(function (cell) {
+                total += parseFloat(cell.innerHTML);
+            });
+
+            // Hiển thị tổng giá trị tại ô total của giỏ hàng
+            var cartTotalCell = document.getElementById('cart-total');
+            if (cartTotalCell) {
+                cartTotalCell.innerHTML = total.toFixed(2);
+            }
+
+            // Cập nhật tổng giá trị giỏ hàng ở đây (ví dụ, hiển thị nó hoặc gửi nó lên máy chủ)
+            console.log('Total Cart Value:', total);
+        }
+    </script>
+
+    </html>

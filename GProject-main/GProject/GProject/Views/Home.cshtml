@@ -1,0 +1,237 @@
+@using GProject.Models;
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        .search-box {
+            display: flex;
+            margin-right: auto;
+            width: 50%;
+            justify-content: center;
+        }
+
+        .search-input {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+        .search-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-right button {
+            margin-left: 10px;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .main-content {
+            margin: 1em 10em;
+        }
+
+        .action {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .result table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .result th,
+        .result td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            width: auto;
+        }
+
+        .button-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .button-container a {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px;
+            text-decoration: none;
+        }
+        .pagination{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <a href="../Home/getAllProducts" style="color: white; text-decoration:none">
+            <h2>Khangnek</h2>
+            </a>
+        </div>
+        <div class="search-box">
+            <form id="searchForm" action="/Home/Search" method="get" style="display: flex; width: 80%">
+    <input type="text" class="search-input" name="path" placeholder="Search...">
+    <button type="submit" class="search-button" onclick="submitForm()">Search</button>
+</form>
+        </div>
+        <div class="header-right">
+            <a href="../Cart/ViewCart">
+            <button>Cart</button>
+            </a>
+            <a href="../Trending/TrendingProduct">
+            <button>Trending</button>
+            </a>
+            <button>Order tracking</button>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="action">
+            <div class="sort">
+                <form method="post" name="SortForm" action="@Url.Action("Sort", "Home")">
+                <label for="sort">Sort By:</label>
+                <select id="sort" name="sort" onchange="SortForm.submit()">
+                    <option value="init">-- Sort by --</option>
+                    <option value="name-asc">Sort by Name (A-Z)</option>
+                    <option value="name-desc">Sort by Name (Z-A)</option>
+                    <option value="price-asc">Sort by Price (Low-High)</option>
+                    <option value="price-desc">Sort by Price (High-Low)</option>
+                </select>
+                </form>
+            </div>
+            <div class="filter">
+                <label for="filter">Filter By:</label>
+                <form method="post" name="FilterbyCategory" action="@Url.Action("FilterByCategory", "Home")">
+                <select id="filter" name="filter" onchange="FilterbyCategory.submit()">
+                    <option value="-1"> -- Filter by Category -- </option>
+                        @{
+                            NorthwindContext _context = new NorthwindContext();
+                            List<Category> GetCategories()
+                            {
+                                List<Category> categories = _context.Categories.ToList();
+                                return categories;
+                            }
+                            foreach(Category c in GetCategories())
+                            {
+                                        <option value="@c.CategoryId">@c.CategoryName</option>
+                            }
+                        }
+                </select>
+                </form>
+            </div>
+        </div>
+
+        <div class="result">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Quantity Per Unit</th>
+                        <th>Price</th>
+                        <th>In Stock</th>
+                        <th>On Order</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Product p in ViewBag.Products)
+                    {
+                            <tr>
+                                <td>@p.ProductId</td>
+                                <td>@p.ProductName</td>
+                                <td>@p.Category.CategoryName</td>
+                                <td>@p.QuantityPerUnit</td>
+                                <td>@p.UnitPrice</td>
+                                <td>@p.UnitsInStock</td>
+                                <td>@p.UnitsOnOrder</td>
+                                <td class="button-container">
+                                        <a style="background-color: #ffa835;" href="../Cart/AddToCart?productId=@p.ProductId">Add to Cart</a>
+                                </td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pagination">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+                    <a href="@Url.Action("getAllProducts", new { page = i })">@i</a>
+        }
+</div>
+</body>
+<script>
+    function onSortChange() {
+        var selectedValue = document.getElementById("sort").value;
+        window.location.href = "/Home/Sort?sort=" + selectedValue;
+    }
+    function onFilterSortChange() {
+        var selectedValue = document.getElementById("filter").value;
+        window.location.href = "/Home/Filter/" + selectedValue;
+    }
+    function submitForm() {
+        var pathValue = document.getElementById("pathInput").value; // Get the value from the input field
+        window.location.href = "/Home/Search/" + pathValue;
+    }
+    $(function () {
+            $("#price-range").slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [200, 800], 
+                slide: function (event, ui) {
+                    $("#price-min").val(ui.values[0]);
+                    $("#price-max").val(ui.values[1]);
+                }
+            });
+
+            $("#price-min").val($("#price-range").slider("values", 0));
+            $("#price-max").val($("#price-range").slider("values", 1));
+        });
+</script>
+
+</html>
