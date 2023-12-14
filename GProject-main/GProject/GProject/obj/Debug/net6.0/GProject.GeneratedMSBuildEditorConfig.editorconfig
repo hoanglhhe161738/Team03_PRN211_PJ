@@ -9,29 +9,29 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GProject
 build_property.RootNamespace = GProject
-build_property.ProjectDir = C:\Users\Admin\Downloads\GProject-main\GProject-main\GProject\GProject\
+build_property.ProjectDir = D:\BL5_PRN211\Team03_PRN211_PJ\GProject-main\GProject\GProject\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Admin\Downloads\GProject-main\GProject-main\GProject\GProject
+build_property.MSBuildProjectDirectory = D:\BL5_PRN211\Team03_PRN211_PJ\GProject-main\GProject\GProject
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Admin/Downloads/GProject-main/GProject-main/GProject/GProject/Views/Home.cshtml]
+[D:/BL5_PRN211/Team03_PRN211_PJ/GProject-main/GProject/GProject/Views/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/GProject-main/GProject-main/GProject/GProject/Views/Result.cshtml]
+[D:/BL5_PRN211/Team03_PRN211_PJ/GProject-main/GProject/GProject/Views/Result.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzdWx0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/GProject-main/GProject-main/GProject/GProject/Views/Trending.cshtml]
+[D:/BL5_PRN211/Team03_PRN211_PJ/GProject-main/GProject/GProject/Views/Trending.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJlbmRpbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/GProject-main/GProject-main/GProject/GProject/Views/ViewCart.cshtml]
+[D:/BL5_PRN211/Team03_PRN211_PJ/GProject-main/GProject/GProject/Views/ViewCart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlld0NhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/Downloads/GProject-main/GProject-main/GProject/GProject/Views/_MenuTop.cshtml]
+[D:/BL5_PRN211/Team03_PRN211_PJ/GProject-main/GProject/GProject/Views/_MenuTop.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX01lbnVUb3AuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

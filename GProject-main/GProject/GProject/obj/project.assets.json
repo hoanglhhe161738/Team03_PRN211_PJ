@@ -2024,11 +2024,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Downloads\\GProject-main\\GProject-main\\GProject\\GProject\\GProject.csproj",
+      "projectUniqueName": "D:\\BL5_PRN211\\Team03_PRN211_PJ\\GProject-main\\GProject\\GProject\\GProject.csproj",
       "projectName": "GProject",
-      "projectPath": "C:\\Users\\Admin\\Downloads\\GProject-main\\GProject-main\\GProject\\GProject\\GProject.csproj",
+      "projectPath": "D:\\BL5_PRN211\\Team03_PRN211_PJ\\GProject-main\\GProject\\GProject\\GProject.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Downloads\\GProject-main\\GProject-main\\GProject\\GProject\\obj\\",
+      "outputPath": "D:\\BL5_PRN211\\Team03_PRN211_PJ\\GProject-main\\GProject\\GProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
